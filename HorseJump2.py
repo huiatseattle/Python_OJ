@@ -17,6 +17,8 @@ class HorseJump2:
             return False
         p1=p/g
         q1=q/g
+        dx=dx/g
+        dy=dy/g
         if (p1-q1)%2:
             return True
         else:
