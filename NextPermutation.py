@@ -8,7 +8,7 @@ class NextPermutation:
         while mid>=0 and arr[mid]>=arr[mid+1]:
             mid-=1
         
-        if mid < 0 and arr[0]>=arr[1]:
+        if mid < 0:
             return False
         #find am, the first value larger than aj. 
         pivot=last
