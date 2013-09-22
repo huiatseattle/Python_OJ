@@ -2,15 +2,20 @@ class MaxBox:
     def maxBoxes(self, boxes):
         if not boxes:
             return 0
-        n=len(boxes)
-        boxes=sorted(boxes,key=lambda x:x.vol)
-        dp=[1]*n
-        for i in range(1,n):
-            for j in range(i):
-                if boxes[j].weight < boxes[i].weight and boxes[j].vol < boxes[i].vol:
-                    dp[i]=dp[j]+1 if (dp[j]+1)>dp[i] else dp[i]
-        try:
-            result=max(dp)
-        except ValueError:
+        if len(boxes)==0:
             return 0
-        return result
+        boxes = sorted(boxes, key=lambda box:box.vol)
+        weights = [box.weight for box in boxes]
+        dp = [1]*len(weights)
+        for i in range(len(weights)):
+            flag = 0
+            maxDp = 0
+            maxIdx = 0
+            for j in range(i):
+                if weights[j]<weights[i] and maxDp<dp[j] and boxes[j].vol<boxes[i].vol:
+                    maxDp = dp[j]
+                    maxIdx = j
+                    flag = 1
+            if flag == 1:
+                dp[i] = dp[maxIdx]+1
+        return max(dp)
