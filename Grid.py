@@ -1,31 +1,14 @@
 class Grid:
     def totalPath(self, blocked):
-        if not blocked:
-            return 0
-        n=len(blocked)
-        if not n:
-            return 0
-        m=len(blocked[0])
-        
-        dp=[[0]*m for x in range(n)]
-        
-        dp[0][0]=1
-        
+        n = len(blocked)
+        m = len(blocked[0])
+        dp = [[0 for col in range(m)] for row in range(n)]
+        dp[0][0] = 0 if blocked[0][0] else 1
         for i in range(1,n):
-            if not blocked[i][0]:
-                dp[i][0]=1
-            else:
-                break
-        
-        for j in xrange(1,m):
-            if not blocked[0][j]:
-                dp[0][j]=1
-            else:
-                break
-        
+            dp[i][0] = 0 if blocked[i][0] else dp[i-1][0]
+        for j in range(1,m):
+            dp[0][j] = 0 if blocked[0][j] else dp[0][j-1]
         for i in range(1,n):
             for j in range(1,m):
-                if not blocked[i][j]:
-                    dp[i][j]=dp[i-1][j]+dp[i][j-1]
-        
+                dp[i][j] = 0 if blocked[i][j] else dp[i-1][j]+dp[i][j-1]
         return dp[n-1][m-1]
