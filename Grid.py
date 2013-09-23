@@ -27,7 +27,5 @@ class Grid:
             for j in range(1,m):
                 if not blocked[i][j]:
                     dp[i][j]=dp[i-1][j]+dp[i][j-1]
-                else:
-                    dp[i][j]=0
         
         return dp[n-1][m-1]
