@@ -1,15 +1,20 @@
 class Candy:
+    #返回最少需要的糖果数
     def minimalCandies(self, ratings):
-        size = len(ratings)
-        left2right = [1] * size
-        for i in range(1, size):
-            if ratings[i] > ratings[i-1]:
-                left2right[i] = left2right[i-1]+1
-        right2left = [1] * size
-        for i in range(size-2,-1,-1):
-            if ratings[i] > ratings[i+1]:
-                right2left[i] = right2left[i+1]+1
-        final = [1] * size
-        for i in range(size):
-            final[i] = max(left2right[i], right2left[i])
-        return sum(final)
+        if not ratings:
+            return 0
+        n=len(ratings)
+        
+        candys=[1]*n
+        for i in range(1,n,1):
+            if ratings[i-1]<ratings[i]:
+                candys[i]=candys[i-1]+1
+        
+        for i in range(n-2,-1,-1):
+            if ratings[i+1]<ratings[i]:
+                if candys[i] == 1:
+                    candys[i]=candys[i+1]+1
+                else:
+                    candys[i]=max(candys[i+1]+1,candys[i])
+                    
+        return sum(candys)
