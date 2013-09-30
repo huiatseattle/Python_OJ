@@ -11,9 +11,6 @@ class MergeSortedArray:
                 elif arr1[idx1] < arr2[idx2]:
                     arr1[idx] = arr2[idx2]
                     idx2 -= 1
-            elif idx1>=0:
-                arr1[idx] = arr1[idx1]
-                idx1 -= 1
             elif idx2>=0:
                 arr1[idx] = arr2[idx2]
                 idx2 -= 1
