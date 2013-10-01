@@ -1,20 +1,32 @@
 class GridVisit:
+    #//如果存在满足条件的遍历,返回True,否则返回False
     def existPath(self, x, y):
-        left = sort(set(x))
-        right = sort(set(y))
-        edge = []
-        k = len(x)
-        leftdegree = [0] * len(left)
-        rightdegree = [0] * len(right)
-        for i in range(k):
-            edge.append([left.index(x[i]), right.index(y[i])])
-            leftdegree[left.index(x[i])] += 1
-            rightdegree[right.index(y[i])] += 1
-        leftdegreecheck = [0 for j in leftdegree if j%2==0 else 1]
-        rightdegreecheck = [0 for j in rightdegree if j%2==0 else 1]
-        if sum(leftdegreecheck)+sum(rightdegreecheck) > 2:
+        if not x or not y:
+            return True
+        
+        k=len(x)
+        
+        n=max(x)+1
+        m=max(y)+1
+        
+        adj=[[0 for j in xrange(m)] for j in xrange(n)]
+        degl=[0]*n
+        degr=[0]*m
+        
+        for i in xrange(k):
+            adj[x[i]][y[i]]=1
+            degl[x[i]]+=1
+            degr[y[i]]+=1
+        
+        rel=[indx for indx,j in enumerate(degl) if j%2]
+        rer=[indx for indx,j in enumerate(degr) if j%2]
+        
+        #no more than two odds
+        if len(rel)+len(rer)>2:
             return False
-        vertexset = [edge[0][0]]
-        while len(vertexset) > lastsize:
-            for p in vertexset:
+        
+        # check connectivity
+        
+        
+        return True
                 
